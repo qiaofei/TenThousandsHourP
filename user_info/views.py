@@ -14,14 +14,18 @@ from user_info.models import UserInfos
 def login(request):
     return HttpResponse(u"login success")
 
-
+@csrf_exempt
 def regist(request):
-    name = request.POST.get('user_name', '')
+    userName = request.POST.get('user_name', '')
     lastTime = request.POST.get('last_time', '')
-    print name + lastTime
-    userInfo = UserInfos(user_name=name, last_time=lastTime)
-    userInfo.save()
-    return HttpResponse(u"regist success")
+    ##查找是否user_name已存在
+    isNameExist = UserInfos.objects.filter(user_name=userName)
+    if len(isNameExist) == 0 :
+        userInfo = UserInfos(user_name=userName, last_time=lastTime)
+        userInfo.save()
+        return HttpResponse(u"regist success")
+    else:
+        return HttpResponse(u"name exist!!")
 
 
 def updateTime(request):
