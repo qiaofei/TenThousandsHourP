@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from UserInfo import views as userViews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^login/', userViews.login),
+    url(r'^regist/', userViews.regist),
+    url(r'^updateTime/', userViews.updateTime),
+    url(r'^testPost/', userViews.testPost),
 ]
