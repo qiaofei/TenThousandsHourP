@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from UserInfo import views as userViews
+from user_info import views as userViews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^regist/', userViews.regist),
     url(r'^updateTime/', userViews.updateTime),
     url(r'^testPost/', userViews.testPost),
+    url(r'^getUserInfo/', userViews.getUserInfo),
 ]
