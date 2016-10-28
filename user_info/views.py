@@ -7,7 +7,7 @@ from django.core import serializers
 import json
 import simplejson
 # Create your views here.
-from user_info.models import UserInfos
+from user_info.models import UserInfo
 
 
 @csrf_exempt
@@ -17,11 +17,11 @@ def login(request):
 @csrf_exempt
 def regist(request):
     userName = request.POST.get('user_name', '')
-    lastTime = request.POST.get('last_time', '')
+    password = request.POST.get('password', '')
     ##查找是否user_name已存在
-    isNameExist = UserInfos.objects.filter(user_name=userName)
+    isNameExist = UserInfo.objects.filter(user_name=userName)
     if len(isNameExist) == 0 :
-        userInfo = UserInfos(user_name=userName, last_time=lastTime)
+        userInfo = UserInfo(user_name=userName, password=password)
         userInfo.save()
         return HttpResponse(u"regist success")
     else:
